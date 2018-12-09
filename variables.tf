@@ -1,3 +1,8 @@
+variable "name" {
+  type        = "string"
+  description = "The display name of the alias. The name must start with the word `alias` followed by a forward slash (alias/)"
+}
+
 variable "policy" {
   default     = ""
   type        = "string"

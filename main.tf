@@ -37,3 +37,9 @@ resource "aws_kms_key" "default" {
   # A mapping of tags to assign to the resource.
   tags = "${var.tags}"
 }
+
+# https://www.terraform.io/docs/providers/aws/r/kms_alias.html
+resource "aws_kms_alias" "default" {
+  name          = "${var.name}"
+  target_key_id = "${aws_kms_key.default.key_id}"
+}

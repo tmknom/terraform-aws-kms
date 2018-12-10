@@ -40,6 +40,6 @@ resource "aws_kms_key" "default" {
 
 # https://www.terraform.io/docs/providers/aws/r/kms_alias.html
 resource "aws_kms_alias" "default" {
-  name          = "${var.name}"
+  name          = "alias/${var.name}"
   target_key_id = "${aws_kms_key.default.key_id}"
 }

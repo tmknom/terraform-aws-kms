@@ -6,6 +6,16 @@
 
 Terraform module which creates KMS resources on AWS.
 
+## Description
+
+Provision [KMS Key](https://docs.aws.amazon.com/kms/latest/developerguide/overview.html) and
+[KMS Alias](https://docs.aws.amazon.com/kms/latest/developerguide/programming-aliases.html).
+
+This module provides recommended settings:
+
+- Enable key rotation
+- Maximum deletion window
+
 ## Usage
 
 ### Minimal

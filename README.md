@@ -4,15 +4,47 @@
 [![GitHub tag](https://img.shields.io/github/tag/tmknom/terraform-aws-kms.svg)](https://registry.terraform.io/modules/tmknom/kms/aws)
 [![License](https://img.shields.io/github/license/tmknom/terraform-aws-kms.svg)](https://opensource.org/licenses/Apache-2.0)
 
-Terraform module template following [Standard Module Structure](https://www.terraform.io/docs/modules/create.html#standard-module-structure).
+Terraform module which creates KMS resources on AWS.
+
+## Description
+
+Provision [KMS Key](https://docs.aws.amazon.com/kms/latest/developerguide/overview.html) and
+[KMS Alias](https://docs.aws.amazon.com/kms/latest/developerguide/programming-aliases.html).
+
+This module provides recommended settings:
+
+- Enable key rotation
+- Maximum deletion window
 
 ## Usage
 
-Named `terraform-<PROVIDER>-<NAME>`. Module repositories must use this three-part name format.
+### Minimal
 
-```sh
-curl -fsSL https://raw.githubusercontent.com/tmknom/terraform-aws-kms/master/install | sh -s terraform-aws-sample
-cd terraform-aws-sample && make install
+```hcl
+module "kms" {
+  source = "git::https://github.com/tmknom/terraform-aws-kms.git?ref=tags/1.0.0"
+  name   = "example"
+}
+```
+
+### Complete
+
+```hcl
+module "kms" {
+  source = "git::https://github.com/tmknom/terraform-aws-kms.git?ref=tags/1.0.0"
+  name   = "example"
+
+  policy                  = "${var.policy}"
+  is_enabled              = true
+  description             = "This is example"
+  key_usage               = "ENCRYPT_DECRYPT"
+  deletion_window_in_days = 14
+  enable_key_rotation     = true
+
+  tags = {
+    Environment = "prod"
+  }
+}
 ```
 
 ## Examples
@@ -22,11 +54,25 @@ cd terraform-aws-sample && make install
 
 ## Inputs
 
-Write your Terraform module inputs.
+| Name                    | Description                                                                                                       |  Type  |        Default         | Required |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------- | :----: | :--------------------: | :------: |
+| name                    | The display name of the alias. The name must start with the word `alias` followed by a forward slash (alias/)     | string |           -            |   yes    |
+| deletion_window_in_days | Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. | string |          `30`          |    no    |
+| description             | The description of the key as viewed in AWS console.                                                              | string | `Managed by Terraform` |    no    |
+| enable_key_rotation     | Specifies whether key rotation is enabled.                                                                        | string |        `false`         |    no    |
+| is_enabled              | Specifies whether the key is enabled.                                                                             | string |         `true`         |    no    |
+| key_usage               | Specifies the intended use of the key.                                                                            | string |   `ENCRYPT_DECRYPT`    |    no    |
+| policy                  | A valid policy JSON document.                                                                                     | string |        `` | no         |
+| tags                    | A mapping of tags to assign to all resources.                                                                     |  map   |          `{}`          |    no    |
 
 ## Outputs
 
-Write your Terraform module outputs.
+| Name                     | Description                                                  |
+| ------------------------ | ------------------------------------------------------------ |
+| kms_alias_arn            | The Amazon Resource Name (ARN) of the key alias.             |
+| kms_alias_target_key_arn | The Amazon Resource Name (ARN) of the target key identifier. |
+| kms_key_arn              | The Amazon Resource Name (ARN) of the key.                   |
+| kms_key_id               | The globally unique identifier for the key.                  |
 
 ## Development
 

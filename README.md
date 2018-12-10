@@ -8,11 +8,33 @@ Terraform module template following [Standard Module Structure](https://www.terr
 
 ## Usage
 
-Named `terraform-<PROVIDER>-<NAME>`. Module repositories must use this three-part name format.
+### Minimal
 
-```sh
-curl -fsSL https://raw.githubusercontent.com/tmknom/terraform-aws-kms/master/install | sh -s terraform-aws-sample
-cd terraform-aws-sample && make install
+```hcl
+module "kms" {
+  source = "git::https://github.com/tmknom/terraform-aws-kms.git?ref=tags/1.0.0"
+  name   = "example"
+}
+```
+
+### Complete
+
+```hcl
+module "kms" {
+  source = "git::https://github.com/tmknom/terraform-aws-kms.git?ref=tags/1.0.0"
+  name   = "example"
+
+  policy                  = "${var.policy}"
+  is_enabled              = true
+  description             = "This is example"
+  key_usage               = "ENCRYPT_DECRYPT"
+  deletion_window_in_days = 14
+  enable_key_rotation     = true
+
+  tags = {
+    Environment = "prod"
+  }
+}
 ```
 
 ## Examples

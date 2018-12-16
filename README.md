@@ -59,7 +59,7 @@ module "kms" {
 | name                    | The display name of the alias. The name must start with the word `alias` followed by a forward slash (alias/)     | string |           -            |   yes    |
 | deletion_window_in_days | Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. | string |          `30`          |    no    |
 | description             | The description of the key as viewed in AWS console.                                                              | string | `Managed by Terraform` |    no    |
-| enable_key_rotation     | Specifies whether key rotation is enabled.                                                                        | string |        `false`         |    no    |
+| enable_key_rotation     | Specifies whether key rotation is enabled.                                                                        | string |         `true`         |    no    |
 | is_enabled              | Specifies whether the key is enabled.                                                                             | string |         `true`         |    no    |
 | key_usage               | Specifies the intended use of the key.                                                                            | string |   `ENCRYPT_DECRYPT`    |    no    |
 | policy                  | A valid policy JSON document.                                                                                     | string |        `` | no         |

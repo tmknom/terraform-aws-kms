@@ -37,7 +37,7 @@ module "kms" {
   source = "git::https://github.com/tmknom/terraform-aws-kms.git?ref=tags/2.0.0"
   name   = "example"
 
-  policy                  = "${var.policy}"
+  policy                  = var.policy
   is_enabled              = true
   description             = "This is example"
   key_usage               = "ENCRYPT_DECRYPT"

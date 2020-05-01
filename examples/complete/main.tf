@@ -2,7 +2,7 @@ module "kms" {
   source = "../../"
   name   = "example"
 
-  policy                  = "${data.aws_iam_policy_document.key_policy.json}"
+  policy                  = data.aws_iam_policy_document.key_policy.json
   is_enabled              = true
   description             = "This is example"
   key_usage               = "ENCRYPT_DECRYPT"

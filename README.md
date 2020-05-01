@@ -76,7 +76,7 @@ module "kms" {
 
 ## Development
 
-### Requirements
+### Development Requirements
 
 - [Docker](https://www.docker.com/)
 

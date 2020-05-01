@@ -22,7 +22,7 @@ This module provides recommended settings:
 
 ```hcl
 module "kms" {
-  source = "git::https://github.com/tmknom/terraform-aws-kms.git?ref=tags/1.1.0"
+  source = "git::https://github.com/tmknom/terraform-aws-kms.git?ref=tags/2.0.0"
   name   = "example"
 }
 ```
@@ -31,7 +31,7 @@ module "kms" {
 
 ```hcl
 module "kms" {
-  source = "git::https://github.com/tmknom/terraform-aws-kms.git?ref=tags/1.1.0"
+  source = "git::https://github.com/tmknom/terraform-aws-kms.git?ref=tags/2.0.0"
   name   = "example"
 
   policy                  = "${var.policy}"

@@ -4,7 +4,7 @@ variable "name" {
 }
 
 variable "policy" {
-  default     = ""
+  default     = null
   type        = string
   description = "A valid policy JSON document."
 }
